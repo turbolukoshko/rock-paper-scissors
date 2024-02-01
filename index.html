@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock Paper Scissors Game!</title>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="assets/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/favicon//favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="assets/favicon//favicon-16x16.png"
+    />
+    <link rel="manifest" href="assets/favicon/site.webmanifest" />
+  </head>
+  <body>
+    <main class="container">
+      <div class="help">
+        <button class="button help-button" onclick="openHelpModal()">
+          Rules
+        </button>
+      </div>
+      <div class="main">
+        <h1 class="title">Rock, Paper, Scissors</h1>
+        <p class="description">
+          Welcome to the classic game of Rock, Paper, Scissors! This simple yet
+          entertaining game is a test of strategy and quick decision-making.
+        </p>
+        <div class="rules-block">
+          <div class="rules">
+            <h3 class="rules__list-title">Rules:</h3>
+            <ol class="rules__list">
+              <li class="rules__list-item">
+                Rock crushes Scissors: If you choose Rock and your opponent
+                chooses Scissors, you win.
+              </li>
+              <li class="rules__list-item">
+                Scissors cuts Paper: If you choose Scissors and your opponent
+                chooses Paper, you win.
+              </li>
+              <li class="rules__list-item">
+                Paper covers Rock: If you choose Paper and your opponent chooses
+                Rock, you win.
+              </li>
+              <li class="rules__list-item">
+                The game is a tie if both players choose the same move.
+              </li>
+            </ol>
+          </div>
+          <div class="how-to-play">
+            <h3 class="how-to-play__title">How to Play:</h3>
+            <ol class="how-to-play__list">
+              <li class="how-to-play__list-item">
+                Click on one of the buttons below to make your move: Rock,
+                Paper, or Scissors.
+              </li>
+              <li class="how-to-play__list-item">
+                The computer will randomly choose its move.
+              </li>
+              <li class="how-to-play__list-item">
+                The winner will be determined based on the rules mentioned
+                above.
+              </li>
+              <li class="how-to-play__list-item">
+                The game consists of 3 rounds. The player with the most round
+                victories is the overall winner.
+              </li>
+            </ol>
+          </div>
+          <p class="have-fun-title">
+            Have fun playing and may the best player win!
+          </p>
+        </div>
+        <div class="game-mode">
+          <div class="game-mode__panel">
+            <button class="button button-start">Start game!</button>
+          </div>
+        </div>
+      </div>
+      <div class="loader">
+        <p class="loader__title">Waiting for an opponent to connect</p>
+        <div class="loader__images">
+          <img src="../assets/user.png" alt="user" class="user-avatar" />
+          <img src="../assets/swords.png" class="vs-icon" />
+          <img src="../assets/robot-3.png" alt="robot" class="robot-avatar" />
+        </div>
+        <p class="loader__countdown"></p>
+      </div>
+      <div class="board">
+        <p class="round-result"></p>
+        <div class="battle-field">
+          <div>
+            <p class="score">Your score: <span class="user-score">0</span></p>
+            <div class="button button-item button-user">
+              <img
+                src="./assets/mark.png"
+                class="question-mark"
+                alt="question-mark"
+              />
+              <img class="user-image" />
+            </div>
+            <div class="user-achievement">
+              <img src="./assets/badge.png" alt="badge" class="badge" />
+            </div>
+          </div>
+          <div class="battle-info">
+            <p class="round">Round 1</p>
+            <img src="../assets/swords.png" class="vs-icon" />
+            <p class="round-score">0 - 0</p>
+          </div>
+          <div>
+            <p class="score">Robot score: <span class="robot-score">0</span></p>
+            <div class="button button-item button-robot">
+              <img
+                src="./assets/mark.png"
+                class="question-mark"
+                alt="question-mark"
+              />
+              <img class="robot-image" />
+            </div>
+            <div class="robot-achievement">
+              <img src="./assets/badge.png" alt="badge" class="badge" />
+            </div>
+          </div>
+        </div>
+        <div class="picker">
+          <h3 class="picker__title">Choose your option:</h3>
+          <div class="picker__items">
+            <div class="picker__item">
+              <button
+                class="button button-item button-item-rock"
+                value="rock"
+              ></button>
+              <p class="picker__item-label">Rock</p>
+            </div>
+            <div class="picker__item">
+              <button
+                class="button button-item button-item-paper"
+                value="paper"
+              ></button>
+              <p class="picker__item-label">Paper</p>
+            </div>
+            <div class="picker__item">
+              <button
+                class="button button-item button-item-scissors"
+                value="scissors"
+              ></button>
+              <p class="picker__item-label">Scissors</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div class="modal-overlay">
+      <div class="modal">
+        <div class="modal__content">
+          <div class="game-over">
+            <button class="btn-close" onclick="closeModal()">&#x2716;</button>
+            <h2 class="modal__content-title">Game over!</h2>
+            <h3 class="modal__content-result"></h3>
+            <p class="modal__content-final-score"></p>
+            <img src="" alt="modal-image" class="modal__image" />
+            <button class="button button-again" onclick="playAgain()">
+              Play again?
+            </button>
+          </div>
+          <div class="rules">
+            <h3 class="rules__list-title">Rules:</h3>
+            <ol class="rules__list">
+              <li class="rules__list-item">
+                Rock crushes Scissors: If you choose Rock and your opponent
+                chooses Scissors, you win.
+              </li>
+              <li class="rules__list-item">
+                Scissors cuts Paper: If you choose Scissors and your opponent
+                chooses Paper, you win.
+              </li>
+              <li class="rules__list-item">
+                Paper covers Rock: If you choose Paper and your opponent chooses
+                Rock, you win.
+              </li>
+              <li class="rules__list-item">
+                The game is a tie if both players choose the same move.
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="index.js"></script>
+</html>

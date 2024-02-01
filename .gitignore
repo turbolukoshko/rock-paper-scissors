@@ -1,0 +1,19 @@
+# Node.js
+node_modules/
+
+# Visual Studio Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Editor configuration
+.editorconfig
+
+# Logs and databases
+*.log
+*.sqlite
