@@ -2,25 +2,15 @@
 
 The Rock, Paper, Scissors game is a classic hand game.
 
-[Open]
-
-## Table of Contents
-
-- [Getting Started](#getting-started)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Deployment](#deployment)
-- [Built With](#built-with)
-- [Contributing](#contributing)
-- [License](#license)
-- [Acknowledgements](#acknowledgements)
+Open game: [Link](https://rock-paper-scissors-seven-weld.vercel.app)
 
 ## Getting Started
 
 These instructions will get your project up and running on your local machine.
 
 ### Prerequisites
+
+The game was written with Vanilla JS. Therefore, there should be no difficulties during installation.
 
 What things you need to install and how to install them:
 
