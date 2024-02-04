@@ -23,6 +23,12 @@ const options = {
   lose: "LOSE",
   draw: "DRAW",
 };
+const colorPalette = {
+  white: "#fff",
+  green: "#29da16",
+  yellow: "#ffea00",
+  grey: "#e4e4e5",
+};
 
 const gameOptions: GameOptionsType = {
   0: "rock",
@@ -34,6 +40,7 @@ const gameOptions: GameOptionsType = {
 const gameMode = document.querySelector(".game-mode");
 const buttonStart = document.querySelector(".button-start");
 const board = document.querySelector(".board");
+const picker = document.querySelector(".picker");
 const pickItem = document.querySelectorAll(".picker__items");
 const userImg = document.querySelector(".user-image");
 const robotImg = document.querySelector(".robot-image");
@@ -75,6 +82,15 @@ pickItem.forEach((item) => {
       if (target.classList.contains("button-item")) {
         if (POINTS_TO_WIN > userScore && POINTS_TO_WIN > robotScore) {
           robotChoice = random();
+          // Block user clicks for 800ms. When calculating the round result
+          (picker as HTMLDivElement).style.background = colorPalette.grey;
+          (picker as HTMLDivElement).style.pointerEvents = "none";
+
+          setTimeout(() => {
+            (picker as HTMLDivElement).style.background = "transparent";
+            (picker as HTMLDivElement).style.pointerEvents = "auto";
+          }, 800);
+
           play((e.target as HTMLButtonElement).value, robotChoice);
         }
 
@@ -234,8 +250,8 @@ const play = (myChoice: string, robotChoice: string) => {
   }
 
   if (isUserWonRound) {
-    (userTile as HTMLDListElement).style.background = "#29DA16";
-    (robotTile as HTMLDListElement).style.background = "#fff";
+    (userTile as HTMLDListElement).style.background = colorPalette.green;
+    (robotTile as HTMLDListElement).style.background = colorPalette.white;
     addArchievement("user");
 
     setTimeout(() => {
@@ -246,24 +262,25 @@ const play = (myChoice: string, robotChoice: string) => {
     roundResult = options.win;
   }
   if (!isUserWonRound) {
-    (userTile as HTMLDListElement).style.background = "#fff";
-    (robotTile as HTMLDListElement).style.background = "#29DA16";
+    (userTile as HTMLDListElement).style.background = colorPalette.white;
+    (robotTile as HTMLDListElement).style.background = colorPalette.green;
 
     setTimeout(() => {
-      (robotTile as HTMLDListElement).style.background = "#fff";
+      (robotTile as HTMLDListElement).style.background = colorPalette.white;
       (roundResultElement as HTMLParagraphElement).innerText = "";
     }, 800);
   }
   if (!isUserWonRound && !isRobotWonRound) {
-    (userTile as HTMLDListElement).style.background = "#FFEA00";
-    (robotTile as HTMLDListElement).style.background = "#FFEA00";
+    (userTile as HTMLDListElement).style.background = colorPalette.yellow;
+    (robotTile as HTMLDListElement).style.background = colorPalette.yellow;
     roundResult = options.draw;
 
     setTimeout(() => {
-      (userTile as HTMLDListElement).style.background = "#fff";
-      (robotTile as HTMLDListElement).style.background = "#fff";
+      (userTile as HTMLDListElement).style.background = colorPalette.white;
+      (robotTile as HTMLDListElement).style.background = colorPalette.white;
     }, 800);
   }
+
   if (isRobotWonRound) {
     addArchievement("robot");
     roundResult = options.lose;
@@ -300,8 +317,8 @@ const playAgain = () => {
   currentGameRound = 1;
   userScoreElement.innerHTML = String(userScore);
   robotScoreElement.innerHTML = String(robotScore);
-  (userTile as HTMLDListElement).style.background = "#fff";
-  (robotTile as HTMLDListElement).style.background = "#fff";
+  (userTile as HTMLDListElement).style.background = colorPalette.white;
+  (robotTile as HTMLDListElement).style.background = colorPalette.white;
   (activeRound as HTMLDivElement).innerText = `Round ${currentGameRound}`;
 
   for (let i = 0; i < questionMarks.length; i++) {

@@ -15,6 +15,12 @@ var options = {
     lose: "LOSE",
     draw: "DRAW",
 };
+var colorPalette = {
+    white: "#fff",
+    green: "#29da16",
+    yellow: "#ffea00",
+    grey: "#e4e4e5",
+};
 var gameOptions = {
     0: "rock",
     1: "scissors",
@@ -24,6 +30,7 @@ var gameOptions = {
 var gameMode = document.querySelector(".game-mode");
 var buttonStart = document.querySelector(".button-start");
 var board = document.querySelector(".board");
+var picker = document.querySelector(".picker");
 var pickItem = document.querySelectorAll(".picker__items");
 var userImg = document.querySelector(".user-image");
 var robotImg = document.querySelector(".robot-image");
@@ -62,6 +69,13 @@ pickItem.forEach(function (item) {
             if (target.classList.contains("button-item")) {
                 if (POINTS_TO_WIN > userScore && POINTS_TO_WIN > robotScore) {
                     robotChoice = random();
+                    // Block user clicks for 800ms. When calculating the round result
+                    picker.style.background = colorPalette.grey;
+                    picker.style.pointerEvents = "none";
+                    setTimeout(function () {
+                        picker.style.background = "transparent";
+                        picker.style.pointerEvents = "auto";
+                    }, 800);
                     play(e.target.value, robotChoice);
                 }
                 if (userScore === POINTS_TO_WIN || robotScore === POINTS_TO_WIN) {
@@ -193,8 +207,8 @@ var play = function (myChoice, robotChoice) {
         isRobotWonRound = true;
     }
     if (isUserWonRound) {
-        userTile.style.background = "#29DA16";
-        robotTile.style.background = "#fff";
+        userTile.style.background = colorPalette.green;
+        robotTile.style.background = colorPalette.white;
         addArchievement("user");
         setTimeout(function () {
             userTile.style.background = "";
@@ -203,20 +217,20 @@ var play = function (myChoice, robotChoice) {
         roundResult = options.win;
     }
     if (!isUserWonRound) {
-        userTile.style.background = "#fff";
-        robotTile.style.background = "#29DA16";
+        userTile.style.background = colorPalette.white;
+        robotTile.style.background = colorPalette.green;
         setTimeout(function () {
-            robotTile.style.background = "#fff";
+            robotTile.style.background = colorPalette.white;
             roundResultElement.innerText = "";
         }, 800);
     }
     if (!isUserWonRound && !isRobotWonRound) {
-        userTile.style.background = "#FFEA00";
-        robotTile.style.background = "#FFEA00";
+        userTile.style.background = colorPalette.yellow;
+        robotTile.style.background = colorPalette.yellow;
         roundResult = options.draw;
         setTimeout(function () {
-            userTile.style.background = "#fff";
-            robotTile.style.background = "#fff";
+            userTile.style.background = colorPalette.white;
+            robotTile.style.background = colorPalette.white;
         }, 800);
     }
     if (isRobotWonRound) {
@@ -248,8 +262,8 @@ var playAgain = function () {
     currentGameRound = 1;
     userScoreElement.innerHTML = String(userScore);
     robotScoreElement.innerHTML = String(robotScore);
-    userTile.style.background = "#fff";
-    robotTile.style.background = "#fff";
+    userTile.style.background = colorPalette.white;
+    robotTile.style.background = colorPalette.white;
     activeRound.innerText = "Round ".concat(currentGameRound);
     for (var i = 0; i < questionMarks.length; i++) {
         questionMarks[i].style.display = "block";
